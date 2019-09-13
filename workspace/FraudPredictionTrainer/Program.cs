@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.ML;
+using Microsoft.ML.Trainers.FastTree;
 
 namespace FraudPredictionTrainer
 {
@@ -21,8 +22,15 @@ namespace FraudPredictionTrainer
                 "amount", "oldbalanceOrg", "oldbalanceDest", "newbalanceOrig", "newbalanceDest"));
 
             var trainingPipeline = dataProcessingPipeline
-                .Append(mlContext.BinaryClassification.Trainers.LbfgsLogisticRegression(labelColumnName: "isFraud"));
-
+             //   .Append(mlContext.BinaryClassification.Trainers.LbfgsLogisticRegression(labelColumnName: "isFraud"));
+                .Append(mlContext.BinaryClassification.Trainers.FastTree(new FastTreeBinaryTrainer.Options 
+                        { 
+                        NumberOfLeaves = 10, 
+                        NumberOfTrees = 50,  
+                        LabelColumnName = "isFraud", 
+                        FeatureColumnName = "Features" 
+                        }));
+                        
             var trainedModel = trainingPipeline.Fit(testTrainData.TrainSet);
 
             var predictions = trainedModel.Transform(testTrainData.TestSet);

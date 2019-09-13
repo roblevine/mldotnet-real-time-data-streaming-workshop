@@ -157,3 +157,4 @@ src/machine-learning/FraudPredictorOnnx/.vs/FraudPredictorOnnx/DesignTimeBuild/.
 src/machine-learning/FraudPredictionTrainer/.vs/FraudPredictionTrainer/DesignTimeBuild/.dtbcache
 obj/
 bin/
+data.csv

@@ -1,0 +1,34 @@
+Inferring Columns ...
+Creating Data loader ...
+Loading data ...
+Exploring multiple ML algorithms and settings to find you the best model for ML task: binary-classification
+For further learning check: https://aka.ms/mlnet-cli
+|     Trainer                              Accuracy      AUC    AUPRC  F1-score  Duration #Iteration             |
+[Source=AutoML, Kind=Trace] Channel started
+[Source=AutoML, Kind=Trace] Evaluating pipeline xf=OneHotEncoding{ col=type:type} xf=OneHotHashEncoding{ col=nameDest:nameDest} xf=ColumnConcatenating{ col=Features:type,nameDest,step,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest,isFlaggedFraud} xf=Normalizing{ col=Features:Features} tr=AveragedPerceptronBinary{}  cache=+
+[Source=AutoML, Kind=Trace] 1	0.999068908600996	00:01:04.9057248	xf=OneHotEncoding{ col=type:type} xf=OneHotHashEncoding{ col=nameDest:nameDest} xf=ColumnConcatenating{ col=Features:type,nameDest,step,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest,isFlaggedFraud} xf=Normalizing{ col=Features:Features} tr=AveragedPerceptronBinary{}  cache=+
+|1    AveragedPerceptronBinary               0.9991   0.9566   0.4087    0.4277      64.9          0             |
+[Source=AutoML, Kind=Trace] Evaluating pipeline xf=OneHotEncoding{ col=type:type} xf=OneHotHashEncoding{ col=nameDest:nameDest} xf=ColumnConcatenating{ col=Features:type,nameDest,step,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest,isFlaggedFraud} xf=Normalizing{ col=Features:Features} tr=SdcaLogisticRegressionBinary{}  cache=+
+[Source=AutoML, Kind=Trace] 2	0.998778922222518	00:00:34.4376483	xf=OneHotEncoding{ col=type:type} xf=OneHotHashEncoding{ col=nameDest:nameDest} xf=ColumnConcatenating{ col=Features:type,nameDest,step,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest,isFlaggedFraud} xf=Normalizing{ col=Features:Features} tr=SdcaLogisticRegressionBinary{}  cache=+
+|2    SdcaLogisticRegressionBinary           0.9988   0.9197   0.1500    0.0626      34.4          0             |
+[Source=AutoML, Kind=Trace] Evaluating pipeline xf=OneHotEncoding{ col=type:type} xf=OneHotHashEncoding{ col=nameDest:nameDest} xf=ColumnConcatenating{ col=Features:type,nameDest,step,amount,oldbalanceOrg,newbalanceOrig,oldbalanceDest,newbalanceDest,isFlaggedFraud} tr=LightGbmBinary{}  cache=-
+
+===============================================Experiment Results=================================================
+------------------------------------------------------------------------------------------------------------------
+|                                                     Summary                                                    |
+------------------------------------------------------------------------------------------------------------------
+|ML Task: binary-classification                                                                                  |
+|Dataset: data.csv                                                                                               |
+|Label : isFraud                                                                                                 |
+|Total experiment time : 120.88 Secs                                                                             |
+|Total number of models explored: 2                                                                              |
+------------------------------------------------------------------------------------------------------------------
+|                                              Top 2 models explored                                             |
+------------------------------------------------------------------------------------------------------------------
+|     Trainer                              Accuracy      AUC    AUPRC  F1-score  Duration #Iteration             |
+|1    AveragedPerceptronBinary               0.9991   0.9566   0.4087    0.4277      64.9          1             |
+|2    SdcaLogisticRegressionBinary           0.9988   0.9197   0.1500    0.0626      34.4          2             |
+------------------------------------------------------------------------------------------------------------------
+Generated trained model for consumption: C:\Dev\git\mldotnet-real-time-data-streaming-workshop\workspace\FraudPredictionTrainer\SampleBinaryClassification\SampleBinaryClassification.Model\MLModel.zip
+Generated C# code for model consumption: C:\Dev\git\mldotnet-real-time-data-streaming-workshop\workspace\FraudPredictionTrainer\SampleBinaryClassification\SampleBinaryClassification.ConsoleApp
+Check out log file for more information: C:\Dev\git\mldotnet-real-time-data-streaming-workshop\workspace\FraudPredictionTrainer\SampleBinaryClassification\logs\debug_log.txt

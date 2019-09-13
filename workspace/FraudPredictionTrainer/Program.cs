@@ -10,8 +10,15 @@ namespace FraudPredictionTrainer
         static void Main(string[] args)
         {
             var mlContext = new MLContext(seed: 1);
-             var data = mlContext.Data.LoadFromTextFile<Transaction>(DataPath, hasHeader: true, separatorChar: ',');
+            
+            var data = mlContext.Data.LoadFromTextFile<Transaction>(DataPath, hasHeader: true, separatorChar: ',');
 
+            var testTrainData = mlContext.Data.TrainTestSplit(data);
+
+            var dataProcessingPipeline = mlContext.Transforms.Categorical.OneHotEncoding("type")
+                .Append(mlContext.Transforms.Categorical.OneHotHashEncoding("nameDest"))
+                .Append(mlContext.Transforms.Concatenate("Features", "type", "nameDest", 
+                "amount", "oldbalanceOrg", "oldbalanceDest", "newbalanceOrig", "newbalanceDest"));
         }
     }
 }

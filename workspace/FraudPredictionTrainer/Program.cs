@@ -19,6 +19,11 @@ namespace FraudPredictionTrainer
                 .Append(mlContext.Transforms.Categorical.OneHotHashEncoding("nameDest"))
                 .Append(mlContext.Transforms.Concatenate("Features", "type", "nameDest", 
                 "amount", "oldbalanceOrg", "oldbalanceDest", "newbalanceOrig", "newbalanceDest"));
+
+            var trainingPipeline = dataProcessingPipeline
+                .Append(mlContext.BinaryClassification.Trainers.LbfgsLogisticRegression(labelColumnName: "isFraud"));
+
+            var trainedModel = trainingPipeline.Fit(testTrainData.TrainSet);
         }
     }
 }

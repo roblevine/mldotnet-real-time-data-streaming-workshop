@@ -24,6 +24,9 @@ namespace FraudPredictionTrainer
                 .Append(mlContext.BinaryClassification.Trainers.LbfgsLogisticRegression(labelColumnName: "isFraud"));
 
             var trainedModel = trainingPipeline.Fit(testTrainData.TrainSet);
+
+            var predictions = trainedModel.Transform(testTrainData.TestSet);
+            var metrics = mlContext.BinaryClassification.Evaluate(predictions, labelColumnName: "isFraud");
         }
     }
 }

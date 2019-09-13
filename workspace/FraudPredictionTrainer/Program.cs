@@ -30,11 +30,13 @@ namespace FraudPredictionTrainer
                         LabelColumnName = "isFraud", 
                         FeatureColumnName = "Features" 
                         }));
-                        
+
             var trainedModel = trainingPipeline.Fit(testTrainData.TrainSet);
 
             var predictions = trainedModel.Transform(testTrainData.TestSet);
             var metrics = mlContext.BinaryClassification.Evaluate(predictions, labelColumnName: "isFraud");
+
+            mlContext.Model.Save(trainedModel, data.Schema, "MLModel.zip");
         }
     }
 }
